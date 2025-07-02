@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Game Predictor</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .console-box {
+      font-family: monospace;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 20px #00ff88;
+      color: #00ff88;
+      height: 250px;
+      overflow-y: auto;
+    }
+    .loading-screen {
+      font-family: monospace;
+      background: #000;
+      color: #00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      z-index: 50;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .hidden-screen {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <div id="loading" class="loading-screen">
+    <p>Loading... Please wait while we set up your experience.</p>
+  </div>
+
+  <div id="mainContent" class="hidden-screen">
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">Earn Real Money with AI Game Predictions</h2>
+      <p class="max-w-xl mb-8 text-gray-300">Join thousands of Mongolian users using smart AI to win in games like Aviator. 98% signal accuracy, real-time predictions!</p>
+
+      <!-- ID input for connection -->
+      <input id="userId" type="text" maxlength="10" placeholder="Enter your 1xBet Account ID (10 digits)" class="bg-gray-700 text-white p-3 rounded-md mb-2" />
+      <p id="errorText" class="text-red-500 mb-4 hidden">Please enter 1xBet ID</p>
+      <button id="connectButton" disabled class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-xl text-lg transition opacity-50 cursor-not-allowed">Connect Account</button>
+
+      <!-- Success message -->
+      <div id="connectionSuccess" class="hidden text-green-400 font-bold mt-6">
+        <p>Account ID: <span id="accountIdDisplay"></span> is successfully connected!</p>
+        <p>Status: Active | 100% Prediction Accuracy | AI Algorithms Analyzed</p>
+        <button id="getSignalButton" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition mt-4">Get Signal</button>
+      </div>
+
+      <!-- Error message for deposit -->
+      <div id="errorBox" class="hidden bg-red-600 p-6 rounded-xl max-w-md mx-auto mt-6">
+        <h2 class="text-xl font-bold mb-2">⚠️ Deposit Not Found</h2>
+        <p class="mb-4">It looks like your account balance is empty. Please make a deposit of 19,000 MNT to unlock access to the signals and start earning!</p>
+        <a href="https://refpa0487572.top/L?tag=d_3324703m_18187c_&site=3324703&ad=18187&r=registration" target="_blank" id="depositButton" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition">
+          Deposit Now on 1xBet
+        </a>
+      </div>
+    </section>
+
+    <section class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Today’s Top Earners (MNT)</h3>
+      <div class="grid md:grid-cols-2 gap-4 text-left max-w-4xl mx-auto text-sm text-green-300">
+        <p>👤 User ID: 1218473422 – MNT 874,120</p>
+        <p>👤 User ID: 9912384741 – MNT 659,400</p>
+        <p>👤 User ID: 3099234822 – MNT 741,300</p>
+        <p>👤 User ID: 1187339121 – MNT 530,000</p>
+        <p>👤 User ID: 4412900113 – MNT 924,800</p>
+        <p>👤 User ID: 8283721091 – MNT 765,800</p>
+        <p>👤 User ID: 7751937742 – MNT 548,700</p>
+        <p>👤 User ID: 5554921811 – MNT 839,600</p>
+        <p>👤 User ID: 1983238742 – MNT 329,100</p>
+        <p>👤 User ID: 3377749301 – MNT 322,700</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("loading").classList.add("hidden-screen");
+      document.getElementById("mainContent").classList.remove("hidden-screen");
+    }, 3000);
+
+    const userIdInput = document.getElementById("userId");
+    const connectBtn = document.getElementById("connectButton");
+    const errorText = document.getElementById("errorText");
+
+    userIdInput.addEventListener("input", () => {
+      const value = userIdInput.value;
+      const isValid = /^[0-9]{10}$/.test(value);
+
+      if (isValid) {
+        errorText.classList.add("hidden");
+        connectBtn.disabled = false;
+        connectBtn.classList.remove("opacity-50", "cursor-not-allowed");
+      } else {
+        errorText.classList.remove("hidden");
+        connectBtn.disabled = true;
+        connectBtn.classList.add("opacity-50", "cursor-not-allowed");
+      }
+    });
+
+    connectBtn.addEventListener("click", () => {
+      const userId = userIdInput.value;
+      document.getElementById("accountIdDisplay").innerText = userId;
+      document.getElementById("connectionSuccess").classList.remove("hidden");
+      document.getElementById("errorBox").classList.add("hidden");
+    });
+
+    document.getElementById("getSignalButton").addEventListener("click", () => {
+      document.getElementById("errorBox").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
